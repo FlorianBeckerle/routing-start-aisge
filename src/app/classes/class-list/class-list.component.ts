@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { DataService } from '../../services/data-service.service';
 
 @Component({
@@ -9,9 +10,13 @@ import { DataService } from '../../services/data-service.service';
 export class ClassListComponent implements OnInit {
   classNames: Array<string>;
 
-  constructor(private dataService: DataService) {}
+  constructor(private dataService: DataService, private router: Router) {}
 
   ngOnInit(): void {
     this.classNames = this.dataService.getClassNames();
+  }
+
+  showStudentsOf(classname) {
+    this.router.navigate(['class-detail', classname]);
   }
 }
