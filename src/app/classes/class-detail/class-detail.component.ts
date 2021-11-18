@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Student } from '../../model/student.model';
 import { DataService } from '../../services/data-service.service';
 
@@ -19,7 +19,9 @@ export class ClassDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.className = this.route.snapshot.params['classname'];
-    this.students = this.dataService.getStudentsOfClass(this.className);
+    this.route.params.subscribe((params: Params) => {
+      this.className = params['classname'];
+      this.students = this.dataService.getStudentsOfClass(this.className);
+    });
   }
 }
